@@ -11,18 +11,19 @@ public class ClapperCommands extends Command {
 	
 	private boolean squaredInputs;
 	
-	private static TeleOpDriveTrain instance;
-	public static TeleOpDriveTrain getInstance()
+	private static ClapperCommands instance;
+	public static ClapperCommands getInstance()
 	{
 		if(instance == null)
-			instance = new TeleOpDriveTrain();
+			instance = new ClapperCommands();
 		return instance;
 		
 		
 	}
 	
-	public ClapperCommands() {
-		//an instance of the drivetrain must be created before this constructor can be used
+	public ClapperCommands() 
+	{
+		//an instance of the Clapper subsystem must be created before this constructor can be used
 		requires(Clapper.getInstance());
 	}
 
@@ -33,8 +34,7 @@ public class ClapperCommands extends Command {
 	}
 
 	
-	//these two methods get the y values of the left and right sticks
-	//this is necessary for the execute method
+	//gets the y value of the left stick on the xbox controller
 	private static double getXboxControllerLeft()
 	{
 		return (OI.getInstance().XboxControllerLeft.getY());
@@ -45,10 +45,7 @@ public class ClapperCommands extends Command {
 	@Override
 	protected void execute() 
 	{
-		Clapper.getInstance().moveClapperMotor(getXboxControllerLeft());
-		
-		
-		
+		Clapper.getInstance().moveClapperMotor(getXboxControllerLeft());	
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
