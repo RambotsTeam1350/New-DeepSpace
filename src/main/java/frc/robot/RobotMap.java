@@ -32,10 +32,20 @@ public class RobotMap {
 	public static final int xboxController = 2;
 	
 	public static final int xboxLeftJoystickY = 1;
-	public static final int xboxRightJoystickY = 5;
+  public static final int xboxRightJoystickY = 5;
+  
+
+  //Compressor
+	public static final int Compressor = 0;
+
+	public static final int xboxCompressorButtonOn = 1;
+	public static final int xboxCompressorButtonOff = 2;
 	
 	
-	
+	//Solenoids
+	public static final int solenoidPort0 = 0;
+  public static final int solenoidPort1 = 1;
+  
 
 	// If you are using multiple modules, make sure to define both the port
 	// number and the module. For example you with a rangefinder:

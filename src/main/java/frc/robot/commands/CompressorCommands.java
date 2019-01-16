@@ -4,48 +4,37 @@ import edu.wpi.first.wpilibj.command.Command;
 
 import frc.robot.OI;
 import frc.robot.Robot;
-import frc.robot.subsystems.Clapper;
+import frc.robot.subsystems.Compress;;
 
 
-public class ClapperCommands extends Command {
+public class CompressorCommands extends Command {
 	
-	private boolean squaredInputs;
-	
-	private static ClapperCommands instance;
-	public static ClapperCommands getInstance()
+	private static CompressorCommands instance;
+	public static CompressorCommands getInstance()
 	{
 		if(instance == null)
-			instance = new ClapperCommands();
+			instance = new CompressorCommands();
 		return instance;
 		
 		
 	}
 	
-	public ClapperCommands() 
+	public CompressorCommands() 
 	{
 		//an instance of the Clapper subsystem must be created before this constructor can be used
-		requires(Clapper.getInstance());
+		requires(Compress.getInstance());
 	}
 
 	// Called just before this Command runs the first time
 	@Override
 	protected void initialize() {
-		squaredInputs = false;
 	}
 
-	
-	//gets the y value of the left stick on the xbox controller
-	private static double getXboxControllerLeft()
-	{
-		return (OI.getInstance().XboxControllerLeft.getY());
-	}
-	
-	
 	// Called repeatedly when this Command is scheduled to run
 	@Override
 	protected void execute() 
 	{
-		Clapper.getInstance().moveClapperMotor(getXboxControllerLeft());	
+		Compress.getInstance().setState(OI.getInstance().xbox.getBButtonPressed());	
 	}
 
 	// Make this return true when this Command no longer needs to run execute()

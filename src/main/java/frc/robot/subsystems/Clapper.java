@@ -39,10 +39,17 @@ public class Clapper extends Subsystem {
 		return instance;
 	}
     
+<<<<<<< HEAD
     	public void moveClapperMotor(double speed)
     	{
         	clapperMotorController.set(speed);
     	}
+=======
+    public void moveClapperMotor(double speed)
+	{
+       	clapperMotorController.set(speed);
+   	}
+>>>>>>> Updated Robot 1/15/19
 	
 	
 	//constructs clapper (nothing needed inside)
@@ -60,4 +67,8 @@ public class Clapper extends Subsystem {
 		//is the same as the clapperMotorContoller and its port in the robotmap class
 		clapperMotorController = new VictorSP(RobotMap.clapperMotor);
 	}
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> Updated Robot 1/15/19

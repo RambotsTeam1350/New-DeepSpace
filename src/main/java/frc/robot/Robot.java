@@ -7,6 +7,11 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Clapper;
+<<<<<<< HEAD
+=======
+import frc.robot.subsystems.Compress;
+import frc.robot.subsystems.Jumper;
+>>>>>>> Updated Robot 1/15/19
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -23,6 +28,11 @@ public class Robot extends TimedRobot {
 	public static OI oi;
 	public static DriveTrain drivetrain;
 	public static Clapper clapper;
+<<<<<<< HEAD
+=======
+	public static Compress compressor;
+	public static Jumper jumper;
+>>>>>>> Updated Robot 1/15/19
 	
 	
 	
@@ -46,6 +56,15 @@ public class Robot extends TimedRobot {
 
 		clapper = Clapper.getInstance();
 		clapper.initialize();
+<<<<<<< HEAD
+=======
+
+		compressor = Compress.getInstance();
+		compressor.initialize();
+
+		jumper = Jumper.getInstance();
+		jumper.initialize();
+>>>>>>> Updated Robot 1/15/19
 		
 	}
 

@@ -7,6 +7,9 @@
 
 package frc.robot;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.buttons.Button;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -27,10 +30,13 @@ public class OI {
 		return instance;
 	}
 	
-	public Joystick leftStick = new Joystick(0);
+  public Joystick leftStick = new Joystick(0);
   public Joystick rightStick = new Joystick(1);
   public Joystick XboxControllerLeft = new Joystick(RobotMap.xboxController);
-	
+
+  public XboxController xbox = new XboxController(RobotMap.xboxController);
+
+  public Button joyRightTrigger = new JoystickButton(rightStick, 1);
 	//// CREATING BUTTONS
 	// One type of button is a joystick button which is any button on a
 	//// joystick.
