@@ -32,7 +32,6 @@ public class AutoClapper extends Command {
 
     private boolean pressed = false;
     private boolean isRunning = false;
-    private boolean switch1 = false;
 
     //gets the y value of the left stick on the xbox controller
 	private void aPressed(){
@@ -40,14 +39,16 @@ public class AutoClapper extends Command {
 		    pressed = true;
 	}
 
-	// Called repeatedly when this Command is scheduled to run
+    // Called repeatedly when this Command is scheduled to run
+    @Override
 	protected void execute() 
 	{
         aPressed();
         isRunning = true;
-        while (!Robot.limitSwitch1.get() && pressed){
+        while (Robot.limitSwitch1.get() && pressed){
 		    Clapper.getInstance().moveClapperMotor(1.0);	
         }
+        Clapper.getInstance().moveClapperMotor(0);
         isRunning = false;
         pressed = false;
 	}

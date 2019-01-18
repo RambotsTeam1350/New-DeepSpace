@@ -2,6 +2,7 @@ package frc.robot.subsystems;
 
 import frc.robot.OI;
 import frc.robot.RobotMap;
+import frc.robot.commands.AutoClapper;
 import frc.robot.commands.ClapperCommands;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -21,11 +22,12 @@ public class Clapper extends Subsystem {
 	//be sure to import your ClapperCommands, see above
 	private VictorSP clapperMotorController;
 	private ClapperCommands clapperInstance;
+	private AutoClapper autoInstance;
 	
 	//runs the clapper
 	public void initDefaultCommand() 
 	{
-		setDefaultCommand(clapperInstance);
+		setDefaultCommand(autoInstance);
 		//clapperInstance is defined below and is an instance of ClapperCommands
 	}
 	
@@ -55,6 +57,7 @@ public class Clapper extends Subsystem {
 	{
 		//the clapperInstance is the instance of the ClapperCommands
 		clapperInstance = ClapperCommands.getInstance();
+		autoInstance = AutoClapper.getInstance();
 		
 		//makes it so the instance of the clapperMotorController in this class
 		//is the same as the clapperMotorContoller and its port in the robotmap class
