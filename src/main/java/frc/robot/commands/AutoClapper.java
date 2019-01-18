@@ -7,19 +7,19 @@ import frc.robot.Robot;
 import frc.robot.subsystems.Clapper;
 
 
-public class ClapperCommands extends Command {
+public class AutoClapper extends Command {
 	
-	private static ClapperCommands instance;
-	public static ClapperCommands getInstance()
+	private static AutoClapper instance;
+	public static AutoClapper getInstance()
 	{
 		if(instance == null)
-			instance = new ClapperCommands();
+			instance = new AutoClapper();
 		return instance;
 		
 		
 	}
 	
-	public ClapperCommands() 
+	public AutoClapper() 
 	{
 		//an instance of the Clapper subsystem must be created before this constructor can be used
 		requires(Clapper.getInstance());
@@ -30,19 +30,26 @@ public class ClapperCommands extends Command {
 	protected void initialize() {
 	}
 
-	
-	//gets the y value of the left stick on the xbox controller
-	private static double getXboxControllerLeft()
-	{
-		return (OI.getInstance().XboxControllerLeft.getY());
+    private boolean pressed = false;
+    private boolean isRunning = false;
+    private boolean switch1 = false;
+
+    //gets the y value of the left stick on the xbox controller
+	private void aPressed(){
+        if (OI.getInstance().xbox.getAButtonPressed() && !isRunning)
+		    pressed = true;
 	}
-	
-	
+
 	// Called repeatedly when this Command is scheduled to run
-	@Override
 	protected void execute() 
 	{
-		Clapper.getInstance().moveClapperMotor(getXboxControllerLeft());	
+        aPressed();
+        isRunning = true;
+        while (!Robot.limitSwitch1.get() && pressed){
+		    Clapper.getInstance().moveClapperMotor(1.0);	
+        }
+        isRunning = false;
+        pressed = false;
 	}
 
 	// Make this return true when this Command no longer needs to run execute()

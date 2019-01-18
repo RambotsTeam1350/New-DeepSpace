@@ -70,7 +70,7 @@ public class Jumper extends Subsystem {
 		jumperInstance = JumperCommands.getInstance();
         
         jumperSolenoid = new DoubleSolenoid(RobotMap.solenoidPort0, RobotMap.solenoidPort1);
-		jumperSolenoid.set(DoubleSolenoid.Value.kForward);
+		jumperSolenoid.set(DoubleSolenoid.Value.kReverse);
 
 		//makes it so the instance of the clapperMotorController in this class
 		//is the same as the clapperMotorContoller and its port in the robotmap class

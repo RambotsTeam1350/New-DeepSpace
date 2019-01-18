@@ -7,6 +7,10 @@ import frc.robot.commands.CompressorCommands;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
+
+////THERE IS A SAFETY ON THAT SAYS A PRESSURE SWITCH IS REQUIRED FOR COMPRESSOR TO WORK
+//To Me: Try to use the start/stop (its easier to read)
+
 //Cannot name this class comressor or it tries to use FRC's compressor, not WPI's
 public class Compress extends Subsystem {
 	
@@ -34,9 +38,9 @@ public class Compress extends Subsystem {
     /** enable/disable compressor */
     public void setState(boolean buttonPressed){
         if (buttonPressed && !isEnabled()) 
-            comp.start(); 
+            comp.setClosedLoopControl(true);
         else if (buttonPressed)
-            comp.stop();
+            comp.setClosedLoopControl(false);
     }
 
     /** return compressor state */
@@ -54,7 +58,9 @@ public class Compress extends Subsystem {
 		//the clapperInstance is the instance of the ClapperCommands
 		compressorInstance = CompressorCommands.getInstance();
         
-        comp = new Compressor();
+        comp = new Compressor(RobotMap.Compressor);
+
+        comp.setClosedLoopControl(false);
 
 		//makes it so the instance of the clapperMotorController in this class
 		//is the same as the clapperMotorContoller and its port in the robotmap class
