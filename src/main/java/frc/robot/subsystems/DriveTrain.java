@@ -8,6 +8,7 @@ import frc.robot.commands.TeleOpDriveTrain;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Subsystem;
+
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Command;
@@ -57,32 +58,52 @@ public class DriveTrain extends Subsystem {
 	{
 		robotDrive.tankDrive(left, right, false);
 	}
-	
+
+	private boolean xPressed = false;
+	private void getXButton(){
+		if (OI.getInstance().xbox.getXButtonPressed() && xPressed == false)
+			xPressed = true;
+		if (OI.getInstance().xbox.getXButtonPressed() && xPressed == true)
+			xPressed = false;		
+	}
 	
 	//takes the input from the joysticks and reads them as speed for the tankdrive
 	public void driveLeftMotor(double speed, double time)
 	{
-		leftMotorController.set(speed);
-		
+		getXButton();
+
+		if (xPressed == false)
+			leftMotorController.set(speed);
+		else if (xPressed == true)
+			rightMotorController.set(speed);
 		//restricts this class from moving outside the method while method is active
 		//but another method can be accessed by something like TeleopDriveTrain
 		Timer.delay(time);
 		
 		//once the motor controller is released, the speed is set to 0
-		leftMotorController.set(0);
+		if (xPressed == false)
+			leftMotorController.set(0);
+		else if (xPressed == true)
+			rightMotorController.set(0);
 		
 	}
 	
 	public void driveRightMotor(double speed, double time)
 	{
-		rightMotorController.set(speed);
+		if (xPressed == false)
+			rightMotorController.set(speed);
+		else if (xPressed == true)
+			leftMotorController.set(speed);
 		
 		//restricts this class from moving outside the method while method is active
 		//but another method can be accessed by something like TeleopDriveTrain
 		Timer.delay(time);
 		
 		//once the motor controller is released, the speed is set to 0
-		rightMotorController.set(0);
+		if (xPressed == false)
+			rightMotorController.set(0);
+		else if (xPressed == true)
+			leftMotorController.set(0);
 		
 	}
 	

@@ -23,7 +23,8 @@ public class RobotMap {
 	//Motor controllers, number = PWM port on bot
 	public static final int rightMotor = 0;
   public static final int leftMotor = 1; 
-  public static final int clapperMotor = 2; 
+	public static final int clapperMotorLeft = 2; 
+	public static final int clapperMotorRight = 3;
 	
 	
 	//Joysticks, number = driver station port
@@ -44,7 +45,9 @@ public class RobotMap {
 	
 	//Solenoids
 	public static final int solenoidPort0 = 0;
-  public static final int solenoidPort1 = 1;
+	public static final int solenoidPort1 = 1;
+	public static final int solenoidPort2 = 2;
+  public static final int solenoidPort3 = 3;
   
 
 	// If you are using multiple modules, make sure to define both the port

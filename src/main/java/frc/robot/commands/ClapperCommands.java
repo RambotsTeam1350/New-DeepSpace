@@ -42,7 +42,7 @@ public class ClapperCommands extends Command {
 	@Override
 	protected void execute() 
 	{
-		Clapper.getInstance().moveClapperMotor(getXboxControllerLeft());	
+		Clapper.getInstance().moveClapperMotors(getXboxControllerLeft());	
 	}
 
 	// Make this return true when this Command no longer needs to run execute()

@@ -34,7 +34,8 @@ public class JumperCommands extends Command {
 	@Override
 	protected void execute() 
 	{
-		Jumper.getInstance().moveJumper();
+		Jumper.getInstance().moveJumper1();
+		Jumper.getInstance().moveJumper2();
 	}
 
 	// Make this return true when this Command no longer needs to run execute()

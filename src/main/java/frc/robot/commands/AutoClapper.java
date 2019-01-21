@@ -46,9 +46,9 @@ public class AutoClapper extends Command {
         aPressed();
         isRunning = true;
         while (Robot.limitSwitch1.get() && pressed){
-		    Clapper.getInstance().moveClapperMotor(1.0);	
+		    Clapper.getInstance().moveClapperMotors(1.0);	
         }
-        Clapper.getInstance().moveClapperMotor(0);
+        Clapper.getInstance().moveClapperMotors(0);
         isRunning = false;
         pressed = false;
 	}
