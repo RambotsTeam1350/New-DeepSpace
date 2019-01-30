@@ -57,9 +57,6 @@ public class TeleOpDriveTrain extends Command {
 	protected void execute() 
 	{
 		DriveTrain.getInstance().tankDrive(getRightStick(), getLeftStick(), squaredInputs);
-		
-		
-		
 	}
 
 	// Make this return true when this Command no longer needs to run execute()

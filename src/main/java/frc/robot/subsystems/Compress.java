@@ -38,9 +38,9 @@ public class Compress extends Subsystem {
     /** enable/disable compressor */
     public void setState(boolean buttonPressed){
         if (buttonPressed && !isEnabled()) 
-            comp.setClosedLoopControl(true);
+            comp.start();
         else if (buttonPressed)
-            comp.setClosedLoopControl(false);
+            comp.stop();
     }
 
     /** return compressor state */
@@ -60,7 +60,7 @@ public class Compress extends Subsystem {
         
         comp = new Compressor(RobotMap.Compressor);
 
-        comp.setClosedLoopControl(false);
+        comp.setClosedLoopControl(true);
 
 		//makes it so the instance of the clapperMotorController in this class
 		//is the same as the clapperMotorContoller and its port in the robotmap class
