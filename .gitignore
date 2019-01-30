@@ -143,6 +143,8 @@ gradlew
 gradlew.bat
 build.gradle
 settings.gradle
+gradle
+/gradle/
 
 # Ignore Gradle GUI config
 gradle-app.setting
