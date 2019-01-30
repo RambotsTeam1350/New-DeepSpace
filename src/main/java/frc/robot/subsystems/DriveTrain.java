@@ -59,40 +59,40 @@ public class DriveTrain extends Subsystem {
 		robotDrive.tankDrive(left, right, false);
 	}
 
-	private boolean xPressed = false;
-	private void getXButton(){
-		if (OI.getInstance().xbox.getXButtonPressed() && xPressed == false)
-			xPressed = true;
-		if (OI.getInstance().xbox.getXButtonPressed() && xPressed == true)
-			xPressed = false;		
+	private boolean rightJoyTrigger = false;
+	private void getRightJoyTrigger(){
+		if (OI.getInstance().joyRightTrigger.get() && rightJoyTrigger == false)
+			rightJoyTrigger = true;
+		if (OI.getInstance().joyRightTrigger.get() && rightJoyTrigger == true)
+			rightJoyTrigger = false;		
 	}
 	
 	//takes the input from the joysticks and reads them as speed for the tankdrive
 	public void driveLeftMotor(double speed, double time)
 	{
-		getXButton();
+		getRightJoyTrigger();
 
-		if (xPressed == false)
+		if (rightJoyTrigger == false)
 			leftMotorController.set(speed);
-		else if (xPressed == true)
+		else if (rightJoyTrigger == true)
 			rightMotorController.set(speed);
 		//restricts this class from moving outside the method while method is active
 		//but another method can be accessed by something like TeleopDriveTrain
 		Timer.delay(time);
 		
 		//once the motor controller is released, the speed is set to 0
-		if (xPressed == false)
+		if (rightJoyTrigger == false)
 			leftMotorController.set(0);
-		else if (xPressed == true)
+		else if (rightJoyTrigger == true)
 			rightMotorController.set(0);
 		
 	}
 	
 	public void driveRightMotor(double speed, double time)
 	{
-		if (xPressed == false)
+		if (rightJoyTrigger == false)
 			rightMotorController.set(speed);
-		else if (xPressed == true)
+		else if (rightJoyTrigger == true)
 			leftMotorController.set(speed);
 		
 		//restricts this class from moving outside the method while method is active
@@ -100,9 +100,9 @@ public class DriveTrain extends Subsystem {
 		Timer.delay(time);
 		
 		//once the motor controller is released, the speed is set to 0
-		if (xPressed == false)
+		if (rightJoyTrigger == false)
 			rightMotorController.set(0);
-		else if (xPressed == true)
+		else if (rightJoyTrigger== true)
 			leftMotorController.set(0);
 		
 	}

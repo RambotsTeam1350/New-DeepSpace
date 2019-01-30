@@ -34,7 +34,7 @@ public class CompressorCommands extends Command {
 	@Override
 	protected void execute() 
 	{
-		Compress.getInstance().setState(OI.getInstance().xbox.getBButtonPressed());	
+		Compress.getInstance().setState(OI.getInstance().xbox.getAButtonPressed());	
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
