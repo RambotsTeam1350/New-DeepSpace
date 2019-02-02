@@ -23,13 +23,11 @@ public class DriveTrain extends Subsystem {
 	//be sure to import the differentialdrive from wpi library
 	private VictorSP leftMotorController;
 	private VictorSP rightMotorController;
-	private TeleOpDriveTrainClapper tankDriveClap;
-	private TeleOpDriveTrainZucc tankDriveZucc;
 	private DifferentialDrive robotDrive;
 	
 	//runs the tankdrive
 	public void initDefaultCommand() {
-		setDefaultCommand(tankDriveZucc);
+		setDefaultCommand(TeleOpDriveTrainZucc.getInstance());
 		// Set the default command for a subsystem here.
 	}
 
@@ -102,11 +100,6 @@ public class DriveTrain extends Subsystem {
 	
 	public void initialize()
 	{
-		
-		//the tankdrive is the instance of the teleopdrivetrain
-		tankDriveClap = TeleOpDriveTrainClapper.getInstance();
-		tankDriveZucc = TeleOpDriveTrainZucc.getInstance();
-		
 		//makes it so the instance of the left and right motor controllers in this class
 		//is the same as the motor controllers and their ports in the robotmap class
 		leftMotorController = new VictorSP(RobotMap.leftMotor);
