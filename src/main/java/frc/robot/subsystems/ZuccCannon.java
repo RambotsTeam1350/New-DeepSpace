@@ -3,16 +3,12 @@ package frc.robot.subsystems;
 import frc.robot.RobotMap;
 import frc.robot.commands.ZuccCannonCommands;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.VictorSP;
-import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
 public class ZuccCannon extends Subsystem
 {
-    private VictorSP zuccLeft;
-    private VictorSP zuccRight;
+    private VictorSP zuccBottom;
     private VictorSP zuccTop;
-    private DifferentialDrive zuccDifferential;
     private ZuccCannonCommands zuccComInstance;
     private static ZuccCannon instance;
 
@@ -33,9 +29,9 @@ public class ZuccCannon extends Subsystem
         setDefaultCommand(zuccComInstance);
     }
 
-    public void moveZuccCannon(double speed)
+    public void moveBottomZucc(double speed)
     {
-        zuccDifferential.arcadeDrive(speed, 0, false);
+        zuccBottom.set(speed);
     }
 
     public void moveTopZucc(double speed)
@@ -47,10 +43,8 @@ public class ZuccCannon extends Subsystem
     {
         zuccComInstance = ZuccCannonCommands.getInstance();
 
-        zuccRight = new VictorSP(RobotMap.zuccCannonRight);
-        zuccLeft = new VictorSP(RobotMap.zuccCannonLeft);
+        zuccBottom = new VictorSP(RobotMap.zuccCannonBottom);
         zuccTop = new VictorSP(RobotMap.zuccCannonTop);
-        zuccDifferential = new DifferentialDrive(zuccLeft, zuccRight);
     }
 
 }

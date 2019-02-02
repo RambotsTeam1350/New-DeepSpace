@@ -21,7 +21,7 @@ public class Jumper extends Subsystem {
 	
 	//declaring the motor controllers, VictorSP is the type of motor controller we use
 	//be sure to import your ClapperCommands, see above
-	private static DoubleSolenoid jumperSolenoid1;
+	private static DoubleSolenoid jumperSolenoid1 = new DoubleSolenoid(RobotMap.solenoidPort0, RobotMap.solenoidPort1);;
 	private static DoubleSolenoid jumperSolenoid2;
 	private JumperCommands jumperInstance;
 	
@@ -37,8 +37,9 @@ public class Jumper extends Subsystem {
 	//creates Clapper instance
 	public static Jumper getInstance()
 	{
-		if(instance == null)
+		if(instance == null){
 			instance = new Jumper();
+		}
 		return instance;
 	}
     
@@ -86,11 +87,11 @@ public class Jumper extends Subsystem {
 
 	public void initialize()
 	{
+		System.out.println("In Initialize");
 		//the clapperInstance is the instance of the ClapperCommands
 		jumperInstance = JumperCommands.getInstance();
         
-        jumperSolenoid1 = new DoubleSolenoid(RobotMap.solenoidPort0, RobotMap.solenoidPort1);
-		jumperSolenoid1.set(DoubleSolenoid.Value.kReverse);
+        jumperSolenoid1.set(DoubleSolenoid.Value.kReverse);
 
 		jumperSolenoid2 = new DoubleSolenoid(RobotMap.solenoidPort2, RobotMap.solenoidPort3);
 		jumperSolenoid2.set(DoubleSolenoid.Value.kReverse);

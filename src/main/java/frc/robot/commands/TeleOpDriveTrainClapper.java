@@ -10,25 +10,24 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 
 import frc.robot.OI;
-import frc.robot.Robot;
 import frc.robot.subsystems.DriveTrain;
 
 
-public class TeleOpDriveTrain extends Command {
+public class TeleOpDriveTrainClapper extends Command {
 	
 	private boolean squaredInputs;
 	
-	private static TeleOpDriveTrain instance;
-	public static TeleOpDriveTrain getInstance()
+	private static TeleOpDriveTrainClapper instance;
+	public static TeleOpDriveTrainClapper getInstance()
 	{
 		if(instance == null)
-			instance = new TeleOpDriveTrain();
+			instance = new TeleOpDriveTrainClapper();
 		return instance;
 		
 		
 	}
 	
-	public TeleOpDriveTrain() {
+	public TeleOpDriveTrainClapper() {
 		//an instance of the drivetrain must be created before this constructor can be used
 		requires(DriveTrain.getInstance());
 	}
@@ -37,6 +36,7 @@ public class TeleOpDriveTrain extends Command {
 	@Override
 	protected void initialize() {
 		squaredInputs = false;
+		DriveTrain.getInstance().setCommand(TeleOpDriveTrainClapper.getInstance());;
 	}
 
 	
@@ -56,7 +56,8 @@ public class TeleOpDriveTrain extends Command {
 	@Override
 	protected void execute() 
 	{
-		DriveTrain.getInstance().tankDrive(getRightStick(), getLeftStick(), squaredInputs);
+		DriveTrain.getInstance().whichDrive();
+		DriveTrain.getInstance().tankDrive(-getLeftStick(), -getRightStick(), squaredInputs);
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
@@ -68,11 +69,13 @@ public class TeleOpDriveTrain extends Command {
 	// Called once after isFinished returns true
 	@Override
 	protected void end() {
+		DriveTrain.getInstance().stopMotors();
 	}
 
 	// Called when another command which requires one or more of the same
 	// subsystems is scheduled to run
 	@Override
 	protected void interrupted() {
+		end();
 	}
 }

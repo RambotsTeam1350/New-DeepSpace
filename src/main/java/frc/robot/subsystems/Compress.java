@@ -16,7 +16,7 @@ public class Compress extends Subsystem {
 	
 	
     private Compressor comp; // initialize compressor
-    private CompressorCommands compressorInstance;
+    private CompressorCommands compressorInstance; // Brings instance of CompressorCommands here
     
     public void initDefaultCommand() {
         setDefaultCommand(compressorInstance);

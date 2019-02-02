@@ -48,7 +48,7 @@ public class ZuccCannonCommands extends Command
 	protected void execute() 
 	{   
         ZuccCannon.getInstance().moveTopZucc(getButtonY());
-        ZuccCannon.getInstance().moveZuccCannon(getButtonX());
+        ZuccCannon.getInstance().moveBottomZucc(getButtonX());
 	}
 
 	// Make this return true when this Command no longer needs to run execute()

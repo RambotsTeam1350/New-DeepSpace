@@ -3,7 +3,6 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 
 import frc.robot.OI;
-import frc.robot.Robot;
 import frc.robot.subsystems.Clapper;
 
 
@@ -43,6 +42,7 @@ public class ClapperCommands extends Command {
 	protected void execute() 
 	{
 		Clapper.getInstance().moveClapperMotors(getXboxControllerLeft());	
+		Clapper.getInstance().movePistons();
 	}
 
 	// Make this return true when this Command no longer needs to run execute()

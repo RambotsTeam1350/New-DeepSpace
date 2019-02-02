@@ -58,6 +58,8 @@ public class Robot extends TimedRobot {
 		compressor = Compress.getInstance();
 		compressor.initialize();
 
+		System.out.println("yes");
+
 		jumper = Jumper.getInstance();
 		jumper.initialize();
 		

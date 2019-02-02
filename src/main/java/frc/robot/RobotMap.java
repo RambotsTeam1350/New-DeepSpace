@@ -25,9 +25,8 @@ public class RobotMap {
   	public static final int leftMotor = 1; 
 	public static final int clapperMotorLeft = 2; 
 	public static final int clapperMotorRight = 3;
-	public static final int zuccCannonLeft = 4;
-	public static final int zuccCannonRight = 5;
-	public static final int zuccCannonTop = 6;
+	public static final int zuccCannonBottom = 4;
+	public static final int zuccCannonTop = 5;
 	
 	
 	//Joysticks, number = driver station port
@@ -41,16 +40,15 @@ public class RobotMap {
 
   	//Compressor
 	public static final int Compressor = 0;
-
-	public static final int xboxCompressorButtonOn = 1;
-	public static final int xboxCompressorButtonOff = 2;
-	
+		
 	
 	//Solenoids
 	public static final int solenoidPort0 = 0;
 	public static final int solenoidPort1 = 1;
 	public static final int solenoidPort2 = 2;
-  	public static final int solenoidPort3 = 3;
+	public static final int solenoidPort3 = 3;
+	public static final int solenoidPort4 = 4;
+  	public static final int solenoidPort5 = 5;  
   
 
 	// If you are using multiple modules, make sure to define both the port

@@ -5,13 +5,11 @@ import frc.robot.RobotMap;
 import frc.robot.commands.AutoClapper;
 import frc.robot.commands.ClapperCommands;
 
-import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.VictorSP;
-import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 
 
 public class Clapper extends Subsystem {
@@ -23,6 +21,7 @@ public class Clapper extends Subsystem {
 	//be sure to import your ClapperCommands, see above
 	private VictorSP clapperMotorControllerLeft;
 	private VictorSP clapperMotorControllerRight;
+	private DoubleSolenoid clapperSolenoid;
 	private static DifferentialDrive clapperMotors;
 	private ClapperCommands clapperInstance;
 	private AutoClapper autoInstance;
@@ -49,7 +48,20 @@ public class Clapper extends Subsystem {
 	//"true" sets squared inputs to true
     public void moveClapperMotors(double speed){
         clapperMotors.arcadeDrive(speed, 0, true);
-    }
+	}
+	
+	public void movePistons(){
+		if (OI.getInstance().xbox.getBButtonPressed() && clapperSolenoid.get() != Value.kReverse) {
+			// SmartDashboard.putString("DB/String 2", "The intake was called
+			// pull");
+			clapperSolenoid.set(DoubleSolenoid.Value.kReverse);
+		}
+		if (OI.getInstance().xbox.getBButtonPressed() && clapperSolenoid.get() != Value.kForward) {
+			// SmartDashboard.putString("DB/String 2", "The intake was called
+			// pull");
+			clapperSolenoid.set(DoubleSolenoid.Value.kForward);
+		}
+	}
 	
 	
 	//constructs clapper (nothing needed inside)
@@ -69,6 +81,9 @@ public class Clapper extends Subsystem {
 		//connects these to the pwm's
 		clapperMotorControllerLeft = new VictorSP(RobotMap.clapperMotorLeft);
 		clapperMotorControllerRight = new VictorSP(RobotMap.clapperMotorRight);
+
+		clapperSolenoid = new DoubleSolenoid(RobotMap.solenoidPort4, RobotMap.solenoidPort5);
+		clapperSolenoid.set(DoubleSolenoid.Value.kReverse);
 
 		//constructs clapperMotors
 		clapperMotors = new DifferentialDrive(clapperMotorControllerLeft, clapperMotorControllerRight);
