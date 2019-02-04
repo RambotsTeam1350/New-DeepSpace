@@ -1,25 +1,22 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-
 import frc.robot.subsystems.Jumper;
-
 
 public class JumperCommands extends Command {
 	
+	//creates instance of JumperCommands
 	private static JumperCommands instance;
 	public static JumperCommands getInstance()
 	{
 		if(instance == null)
 			instance = new JumperCommands();
 		return instance;
-		
-		
 	}
 	
 	public JumperCommands() 
 	{
-		//an instance of the Clapper subsystem must be created before this constructor can be used
+		//an instance of the Jumper subsystem must be created before this constructor can be used
 		requires(Jumper.getInstance());
 	}
 
@@ -32,6 +29,7 @@ public class JumperCommands extends Command {
 	@Override
 	protected void execute() 
 	{
+		//accesses the Jumper subsystem and call the method moveJumper1() and moveJumper2()
 		Jumper.getInstance().moveJumper1();
 		Jumper.getInstance().moveJumper2();
 	}

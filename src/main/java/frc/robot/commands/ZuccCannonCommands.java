@@ -1,13 +1,12 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-
 import frc.robot.OI;
-import frc.robot.Robot;
 import frc.robot.subsystems.ZuccCannon;
 
 public class ZuccCannonCommands extends Command
 {
+    //creates instance of ZuccCannonCommands
     private static ZuccCannonCommands instance;
     public static ZuccCannonCommands getInstance()
     {
@@ -16,6 +15,7 @@ public class ZuccCannonCommands extends Command
         return instance;
     }
 
+    //needs an instance of the ZuccCannon subystem before this can be constructed
     public ZuccCannonCommands()
     {
         requires(ZuccCannon.getInstance());
@@ -28,7 +28,7 @@ public class ZuccCannonCommands extends Command
         //empty
     }
     
-
+    //while the Y button is pressed, return full speed, else off
     public double getButtonY()
     {
         if (OI.getInstance().xbox.getYButton())
@@ -36,6 +36,7 @@ public class ZuccCannonCommands extends Command
         return 0;
     }
 
+    //while the X button is pressed, return full speed, else off
     public double getButtonX()
     {
         if(OI.getInstance().xbox.getXButton())
@@ -47,7 +48,12 @@ public class ZuccCannonCommands extends Command
 	@Override
 	protected void execute() 
 	{   
+        //the top motor of the Zucc is bound to the Y button
+        //while the Y button is pressed, the motor will spin full speed
         ZuccCannon.getInstance().moveTopZucc(getButtonY());
+
+        //the bottom motor of the Zucc is bound to the X button
+        //while the X button is pressed, the motor will spin full speed
         ZuccCannon.getInstance().moveBottomZucc(getButtonX());
 	}
 

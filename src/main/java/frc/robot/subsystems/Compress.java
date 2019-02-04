@@ -3,7 +3,6 @@ package frc.robot.subsystems;
 import frc.robot.OI;
 import frc.robot.RobotMap;
 import frc.robot.commands.CompressorCommands;
-
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -14,17 +13,19 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 //Cannot name this class comressor or it tries to use FRC's compressor, not WPI's
 public class Compress extends Subsystem {
 	
-	
-    private Compressor comp; // initialize compressor
-    private CompressorCommands compressorInstance; // Brings instance of CompressorCommands here
+	//initialize the Compressor object
+    private Compressor comp;
+
+    //creates instance variable of CompressorCommands
+    private CompressorCommands compressorInstance; 
     
+    //CompressorCommands is now the default command
     public void initDefaultCommand() {
         setDefaultCommand(compressorInstance);
     }
 
+    //creates instance of Compress subsystem
     private static Compress instance;
-
-	//creates Compress instance
 	public static Compress getInstance()
 	{
 		if(instance == null)
@@ -32,10 +33,12 @@ public class Compress extends Subsystem {
 		return instance;
     }
     
+    //empty constructor
     public Compress(){
     }
     
-    /** enable/disable compressor */
+    //allows for enabling and disabling of compressor
+    //if the specified button is pressed and 
     public void setState(boolean buttonPressed){
         if (buttonPressed && !isEnabled()) 
             comp.start();
@@ -43,26 +46,25 @@ public class Compress extends Subsystem {
             comp.stop();
     }
 
-    /** return compressor state */
+    // return compressor state
     public boolean isEnabled(){
 		return comp.enabled();
     }
     
-   /** blindly change the state to !state */
+   //blindly change the state to !state
     public void toggle(){
 		setState(!isEnabled());
     }
 
     public void initialize()
 	{
-		//the clapperInstance is the instance of the ClapperCommands
+		//the compressorInstance is the instance of the CompressorCommands
 		compressorInstance = CompressorCommands.getInstance();
         
+        //binds the compressor to the PWM specified in RobotMap
         comp = new Compressor(RobotMap.Compressor);
 
+        //set the PCM in closed loop control mode
         comp.setClosedLoopControl(true);
-
-		//makes it so the instance of the clapperMotorController in this class
-		//is the same as the clapperMotorContoller and its port in the robotmap class
 	}
 }

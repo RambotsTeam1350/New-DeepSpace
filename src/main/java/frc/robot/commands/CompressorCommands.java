@@ -8,6 +8,7 @@ import frc.robot.subsystems.Compress;;
 
 public class CompressorCommands extends Command {
 	
+	//creates instance of CompressorCommands
 	private static CompressorCommands instance;
 	public static CompressorCommands getInstance()
 	{
@@ -20,7 +21,7 @@ public class CompressorCommands extends Command {
 	
 	public CompressorCommands() 
 	{
-		//an instance of the Clapper subsystem must be created before this constructor can be used
+		//an instance of the Compress subsystem must be created before this constructor can be used
 		requires(Compress.getInstance());
 	}
 
@@ -33,6 +34,10 @@ public class CompressorCommands extends Command {
 	@Override
 	protected void execute() 
 	{
+		//accesses the Compress subsystem and gets an instance of Clapper
+		//uses the method setState from Compress
+		//gets an instance of the OI to access the "xbox" variable
+		//uses the built in command getAButtonPressed to return a boolean which is used as the parameter
 		Compress.getInstance().setState(OI.getInstance().xbox.getAButtonPressed());	
 	}
 

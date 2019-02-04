@@ -23,7 +23,7 @@ public class Robot extends TimedRobot {
 //	public static ExampleSubsystem m_subsystem = new ExampleSubsystem();
 //	public static OI m_oi;
 	
-	//connects to OI and drivetrain so their variables are here????
+	//these are used below to initialize all subsystems
 	public static OI oi;
 	public static DriveTrain drivetrain;
 	public static Clapper clapper;
@@ -31,8 +31,6 @@ public class Robot extends TimedRobot {
 	public static Jumper jumper;
 	public static DigitalInput limitSwitch1;
 	private Vision vision;
-	
-	
 	
 	Command m_autonomousCommand;
 	SendableChooser<Command> m_chooser = new SendableChooser<>();
@@ -48,7 +46,7 @@ public class Robot extends TimedRobot {
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", m_chooser);
 		
-		
+		//initializes all subsystems
 		drivetrain = DriveTrain.getInstance();
 		drivetrain.initialize();
 
@@ -57,8 +55,6 @@ public class Robot extends TimedRobot {
 
 		compressor = Compress.getInstance();
 		compressor.initialize();
-
-		System.out.println("yes");
 
 		jumper = Jumper.getInstance();
 		jumper.initialize();

@@ -1,14 +1,6 @@
-/*----------------------------------------------------------------------------*/
-/* Copyright (c) 2017-2018 FIRST. All Rights Reserved.                        */
-/* Open Source Software - may be modified and shared by FRC teams. The code   */
-/* must be accompanied by the FIRST BSD license file in the root directory of */
-/* the project.                                                               */
-/*----------------------------------------------------------------------------*/
-
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-
 import frc.robot.OI;
 import frc.robot.subsystems.DriveTrain;
 
@@ -17,14 +9,13 @@ public class TeleOpDriveTrainZucc extends Command {
 	
 	private boolean squaredInputs;
 	
+	//creates instance of this class
 	private static TeleOpDriveTrainZucc instance;
 	public static TeleOpDriveTrainZucc getInstance()
 	{
 		if(instance == null)
 			instance = new TeleOpDriveTrainZucc();
 		return instance;
-		
-		
 	}
 	
 	public TeleOpDriveTrainZucc() {
@@ -35,7 +26,10 @@ public class TeleOpDriveTrainZucc extends Command {
 	// Called just before this Command runs the first time
 	@Override
 	protected void initialize() {
+		//this makes the acceleration linear instead of exponential
 		squaredInputs = false;
+
+		//sets the drivetrain in the direction of the intake of the Zucc
 		DriveTrain.getInstance().setCommand(TeleOpDriveTrainZucc.getInstance());;
 	}
 
@@ -56,7 +50,12 @@ public class TeleOpDriveTrainZucc extends Command {
 	@Override
 	protected void execute() 
 	{
+		//calls the whichDrive() method to determine which direction the drivetrain should drive
 		DriveTrain.getInstance().whichDrive();
+
+		//the side of the robot with the Zucc intake is considered the front
+		//hence why the values for the right and left stick are set positive here
+		//this sets the drivetrain to have the front where the intake of the Zucc is
 		DriveTrain.getInstance().tankDrive(getRightStick(), getLeftStick(), squaredInputs);
 	}
 
@@ -69,6 +68,7 @@ public class TeleOpDriveTrainZucc extends Command {
 	// Called once after isFinished returns true
 	@Override
 	protected void end() {
+		//stops the motors
 		DriveTrain.getInstance().stopMotors();
 	}
 
@@ -76,6 +76,7 @@ public class TeleOpDriveTrainZucc extends Command {
 	// subsystems is scheduled to run
 	@Override
 	protected void interrupted() {
+		//stops the motors
 		end();
 	}
 }

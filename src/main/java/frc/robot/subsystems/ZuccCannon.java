@@ -7,11 +7,15 @@ import edu.wpi.first.wpilibj.VictorSP;
 
 public class ZuccCannon extends Subsystem
 {
+    //defines motor controllers
     private VictorSP zuccBottom;
     private VictorSP zuccTop;
-    private ZuccCannonCommands zuccComInstance;
-    private static ZuccCannon instance;
 
+    //instance variable of ZuccCannonCommands
+    private ZuccCannonCommands zuccComInstance;
+
+    //creates instance of ZuccCannon subsystem
+    private static ZuccCannon instance;
     public static ZuccCannon getInstance()
     {
         if (instance == null)
@@ -24,16 +28,19 @@ public class ZuccCannon extends Subsystem
         //empty
     }
 
+    //default command is ZuccCannonCommands, use its instance variable here
     public void initDefaultCommand()
     {
         setDefaultCommand(zuccComInstance);
     }
 
+    //speed of bottom motor retrieved and set
     public void moveBottomZucc(double speed)
     {
         zuccBottom.set(speed);
     }
 
+    //speed of top motor retrieved and set
     public void moveTopZucc(double speed)
     {
         zuccTop.set(speed);
@@ -41,8 +48,10 @@ public class ZuccCannon extends Subsystem
 
     public void intitialize()
     {
+        //gets instance of ZuccCannonCommands
         zuccComInstance = ZuccCannonCommands.getInstance();
 
+        //defines the motors as VictorSPs and binds them to the ports specified in RobotMap
         zuccBottom = new VictorSP(RobotMap.zuccCannonBottom);
         zuccTop = new VictorSP(RobotMap.zuccCannonTop);
     }

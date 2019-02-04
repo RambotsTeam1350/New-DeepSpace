@@ -9,14 +9,13 @@ import frc.robot.subsystems.Clapper;
 
 public class AutoClapper extends Command {
 	
+	//creates instance of AutoClapper
 	private static AutoClapper instance;
 	public static AutoClapper getInstance()
 	{
 		if(instance == null)
 			instance = new AutoClapper();
 		return instance;
-		
-		
 	}
 	
 	public AutoClapper() 
@@ -30,12 +29,16 @@ public class AutoClapper extends Command {
 	protected void initialize() {
 	}
 
+	//initializes the pressed and isRunning variables and sets them to false
     private boolean pressed = false;
     private boolean isRunning = false;
 
     //gets the y value of the left stick on the xbox controller
-	private void aPressed(){
-        if (OI.getInstance().xbox.getAButtonPressed() && !isRunning)
+	private void aPressed()
+	{
+		//if the A button is pressed and the clapper is not already moving
+		//then the variable pressed = true
+		if (OI.getInstance().xbox.getAButtonPressed() && !isRunning)
 		    pressed = true;
 	}
 
@@ -43,12 +46,24 @@ public class AutoClapper extends Command {
     @Override
 	protected void execute() 
 	{
-        aPressed();
-        isRunning = true;
+		//checks to see if the A button is pressed and sets the variable accordingly
+		aPressed();
+		
+		//sets isRunning to true, will later be turned back to false
+		//necessary to intitialize as false, change to true here, and then change back to false
+		//because it needs to be false for the aPressed() method, but needs to be true so aPressed only happens once
+		//and then the clapper is no longer moving at the end of execute() and aPressed() can be called again
+		isRunning = true;
+		
+		//while the limit switch is not pressed and the value of pressed is true
+		//move the clapper at full speed
         while (Robot.limitSwitch1.get() && pressed){
 		    Clapper.getInstance().moveClapperMotors(1.0);	
-        }
-        Clapper.getInstance().moveClapperMotors(0);
+		}
+		//after the switch is hit, stop the motors
+		Clapper.getInstance().moveClapperMotors(0);
+		
+		//set variables back to false
         isRunning = false;
         pressed = false;
 	}

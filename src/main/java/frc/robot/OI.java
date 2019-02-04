@@ -20,9 +20,8 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 //singleton class (use google, I can't explain it in 2 lines of comments)
 public class OI {
 	
+	//creates instance of OI
 	private static OI instance;
-	
-	//this is the constructor
 	public static OI getInstance() 
 	{
 		if (instance == null)
@@ -30,13 +29,18 @@ public class OI {
 		return instance;
 	}
 	
-  public Joystick leftStick = new Joystick(0);
-  public Joystick rightStick = new Joystick(1);
-  public Joystick XboxControllerLeft = new Joystick(RobotMap.xboxController);
+	//defines joysticks
+  	public Joystick leftStick = new Joystick(0);
+ 	public Joystick rightStick = new Joystick(1);
+  	public Joystick XboxControllerLeft = new Joystick(RobotMap.xboxController);
 
-  public XboxController xbox = new XboxController(RobotMap.xboxController);
+	//defines xbox controller
+  	public XboxController xbox = new XboxController(RobotMap.xboxController);
 
-  public Button joyRightTrigger = new JoystickButton(rightStick, 1);
+	//defines the right trigger on the right main joystick
+	  public Button joyRightTrigger = new JoystickButton(rightStick, 1);
+	  
+	//these comments below were given by WPI, give them a read
 	//// CREATING BUTTONS
 	// One type of button is a joystick button which is any button on a
 	//// joystick.
