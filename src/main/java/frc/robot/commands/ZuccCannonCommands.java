@@ -28,21 +28,6 @@ public class ZuccCannonCommands extends Command
         //empty
     }
     
-    //while the Y button is pressed, return full speed, else off
-    public double getButtonY()
-    {
-        if (OI.getInstance().xbox.getYButton())
-            return 1.0;
-        return 0;
-    }
-
-    //while the X button is pressed, return full speed, else off
-    public double getButtonX()
-    {
-        if(OI.getInstance().xbox.getXButton())
-            return 1.0;
-        return 0;
-    }
 
     // Called repeatedly when this Command is scheduled to run
 	@Override
@@ -50,11 +35,11 @@ public class ZuccCannonCommands extends Command
 	{   
         //the top motor of the Zucc is bound to the Y button
         //while the Y button is pressed, the motor will spin full speed
-        ZuccCannon.getInstance().moveTopZucc(getButtonY());
+        ZuccCannon.getInstance().moveTopZucc(OI.getInstance().xbox.getXButton());
 
         //the bottom motor of the Zucc is bound to the X button
         //while the X button is pressed, the motor will spin full speed
-        ZuccCannon.getInstance().moveBottomZucc(getButtonX());
+        ZuccCannon.getInstance().moveBottomZucc(OI.getInstance().xbox.getYButton());
 	}
 
 	// Make this return true when this Command no longer needs to run execute()

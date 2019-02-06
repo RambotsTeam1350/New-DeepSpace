@@ -35,18 +35,24 @@ public class ZuccCannon extends Subsystem
     }
 
     //speed of bottom motor retrieved and set
-    public void moveBottomZucc(double speed)
+    public void moveBottomZucc(boolean speed)
     {
-        zuccBottom.set(speed);
+        if (speed)
+            zuccBottom.set(1.0);
+        else
+            zuccBottom.set(0);
     }
 
     //speed of top motor retrieved and set
-    public void moveTopZucc(double speed)
+    public void moveTopZucc(boolean speed)
     {
-        zuccTop.set(speed);
+        if (speed)
+            zuccTop.set(1.0);
+        else
+            zuccTop.set(0);
     }
 
-    public void intitialize()
+    public void initialize()
     {
         //gets instance of ZuccCannonCommands
         zuccComInstance = ZuccCannonCommands.getInstance();

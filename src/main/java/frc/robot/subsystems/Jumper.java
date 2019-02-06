@@ -66,7 +66,7 @@ public class Jumper extends Subsystem {
 		jumperInstance = JumperCommands.getInstance();
 		
 		//jumper solenoid1 is bound to port 1
-		jumperSolenoid1 = new DoubleSolenoid(RobotMap.solenoidPort1,RobotMap.solenoidPort1);
+		jumperSolenoid1 = new DoubleSolenoid(RobotMap.solenoidPort0,RobotMap.solenoidPort1);
 
 		//default value of piston is reverse (compressed)
         jumperSolenoid1.set(DoubleSolenoid.Value.kReverse);
