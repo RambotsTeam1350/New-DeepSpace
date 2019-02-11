@@ -34,24 +34,32 @@ public class Jumper extends Subsystem {
 		return instance;
 	}
 	
+	private boolean oneOut;
 	//extends or compresses jumper piston1 with left bumper of xbox controller
 	public void moveJumper1() 
 	{
-		if (OI.getInstance().xbox.getBumperPressed(Hand.kLeft) && jumperSolenoid1.get() != Value.kForward)
-			jumperSolenoid1.set(DoubleSolenoid.Value.kForward);
-		
-		if (OI.getInstance().xbox.getBumperPressed(Hand.kLeft) && jumperSolenoid1.get() != Value.kReverse)
-			jumperSolenoid1.set(DoubleSolenoid.Value.kReverse);
+		if (oneOut){
+			jumperSolenoid1.set(Value.kReverse);
+			oneOut = false;
+		}
+		else if (!oneOut){
+			jumperSolenoid1.set(Value.kForward);
+			oneOut = true;
+		}
 	}
 
+	private boolean twoOut;
 	//extends and compresses jumper piston2 with right bumper of xbox controller
 	public void moveJumper2() 
 	{
-		if (OI.getInstance().xbox.getBumperPressed(Hand.kRight) && jumperSolenoid2.get() != Value.kForward)
-			jumperSolenoid2.set(DoubleSolenoid.Value.kForward);
-		
-		if (OI.getInstance().xbox.getBumperPressed(Hand.kRight) && jumperSolenoid2.get() != Value.kReverse) 
-			jumperSolenoid2.set(DoubleSolenoid.Value.kReverse);
+		if (twoOut){
+			jumperSolenoid2.set(Value.kReverse);
+			twoOut = false;
+		}
+		else if (!twoOut){
+			jumperSolenoid2.set(Value.kForward);
+			twoOut = true;
+		}
 	}
 	
 	//constructs Jumper, nothing needed inside
@@ -66,7 +74,7 @@ public class Jumper extends Subsystem {
 		jumperInstance = JumperCommands.getInstance();
 		
 		//jumper solenoid1 is bound to port 1
-		jumperSolenoid1 = new DoubleSolenoid(RobotMap.solenoidPort1,RobotMap.solenoidPort1);
+		jumperSolenoid1 = new DoubleSolenoid(RobotMap.solenoidPort0,RobotMap.solenoidPort1);
 
 		//default value of piston is reverse (compressed)
         jumperSolenoid1.set(DoubleSolenoid.Value.kReverse);
@@ -76,5 +84,8 @@ public class Jumper extends Subsystem {
 
 		//default value of piston is reverse (compressed)
 		jumperSolenoid2.set(DoubleSolenoid.Value.kReverse);
+
+		oneOut = false;
+		twoOut =  false;
 	}
 }

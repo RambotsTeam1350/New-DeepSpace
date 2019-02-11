@@ -1,4 +1,6 @@
 package frc.robot.commands;
+import frc.robot.OI;
+import edu.wpi.first.wpilibj.GenericHID.Hand;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.subsystems.Jumper;
@@ -30,8 +32,12 @@ public class JumperCommands extends Command {
 	protected void execute() 
 	{
 		//accesses the Jumper subsystem and call the method moveJumper1() and moveJumper2()
-		Jumper.getInstance().moveJumper1();
-		Jumper.getInstance().moveJumper2();
+		if (OI.getInstance().xbox.getBumperPressed(Hand.kLeft)){
+			Jumper.getInstance().moveJumper1();
+		}
+		if (OI.getInstance().xbox.getBumperPressed(Hand.kRight)){
+			Jumper.getInstance().moveJumper2();
+		}
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
