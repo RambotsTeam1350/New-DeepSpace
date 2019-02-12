@@ -1,12 +1,10 @@
 package frc.robot.subsystems;
 
-import frc.robot.OI;
 import frc.robot.RobotMap;
 import frc.robot.commands.JumperCommands;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.GenericHID.Hand;
 
 
 public class Jumper extends Subsystem {

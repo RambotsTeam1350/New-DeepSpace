@@ -1,6 +1,5 @@
 package frc.robot.subsystems;
 
-import frc.robot.OI;
 import frc.robot.RobotMap;
 import frc.robot.commands.CompressorCommands;
 import edu.wpi.first.wpilibj.Compressor;

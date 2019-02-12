@@ -27,29 +27,19 @@ public class ZuccCannonCommands extends Command
     {
         //empty
     }
-    private boolean yPressed = false;
+    
     //while the Y button is pressed, return full speed, else off
     public double getButtonY()
     {
-
-        if (OI.getInstance().xbox.getYButtonPressed())
-            yPressed = true;
-        if (OI.getInstance().xbox.getYButtonPressed())
-            yPressed = false;
-        if (yPressed)
+        if (OI.getInstance().xbox.getYButton())
             return 1.0;
         return 0;
     }
 
-    private boolean xPressed = false;
     //while the X button is pressed, return full speed, else off
     public double getButtonX()
     {
-        if(OI.getInstance().xbox.getXButtonPressed())
-            xPressed = true;
-        if(OI.getInstance().xbox.getXButtonReleased())
-            xPressed = false;
-        if (xPressed)
+        if(OI.getInstance().xbox.getXButton())
             return 1.0;
         return 0;
     }

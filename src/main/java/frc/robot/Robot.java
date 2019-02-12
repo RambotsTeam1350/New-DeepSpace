@@ -10,7 +10,9 @@ import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Clapper;
 import frc.robot.subsystems.Compress;
 import frc.robot.subsystems.Jumper;
+import frc.robot.subsystems.ZuccCannon;
 import frc.robot.util.Vision;
+
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -31,6 +33,7 @@ public class Robot extends TimedRobot {
 	public static Jumper jumper;
 	public static DigitalInput limitSwitch1;
 	private Vision vision;
+	private ZuccCannon zucc;
 	
 	Command m_autonomousCommand;
 	SendableChooser<Command> m_chooser = new SendableChooser<>();
@@ -58,6 +61,9 @@ public class Robot extends TimedRobot {
 
 		jumper = Jumper.getInstance();
 		jumper.initialize();
+		
+		zucc = ZuccCannon.getInstance();
+		zucc.intitialize();
 		
 		limitSwitch1 = new DigitalInput(1);
 
