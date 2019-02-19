@@ -4,6 +4,7 @@ import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.command.Command;
 
 import frc.robot.OI;
+import frc.robot.Robot;
 import frc.robot.subsystems.Clapper;
 
 
@@ -42,7 +43,9 @@ public class ClapperCommands extends Command {
 		
 		//gets instance of Clapper subsystem to access its methods
 		//uses the method movePistons which is written in Clapper
-		Clapper.getInstance().movePistons();
+		if (OI.getInstance().xbox.getBButtonPressed()){
+			Clapper.getInstance().movePistons();
+		}
 	}
 
 	// Make this return true when this Command no longer needs to run execute()

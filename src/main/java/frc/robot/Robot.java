@@ -1,10 +1,14 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.Ultrasonic;
+import edu.wpi.first.wpilibj.Ultrasonic.Unit;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.AnalogInput;
+import edu.wpi.first.wpilibj.AnalogOutput;
 import edu.wpi.first.wpilibj.DigitalInput;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Clapper;
@@ -25,31 +29,34 @@ public class Robot extends TimedRobot {
 //	public static ExampleSubsystem m_subsystem = new ExampleSubsystem();
 //	public static OI m_oi;
 	
-	//these are used below to initialize all subsystems
+	private static final int _1 = 1;
+	// these are used below to initialize all subsystems
 	public static OI oi;
 	public static DriveTrain drivetrain;
 	public static Clapper clapper;
 	public static Compress compressor;
 	public static Jumper jumper;
 	public static DigitalInput limitSwitch1;
+	public static AnalogInput ultra;
 	private Vision vision;
 	private ZuccCannon zucc;
-	
+
 	Command m_autonomousCommand;
 	SendableChooser<Command> m_chooser = new SendableChooser<>();
 
 	/**
-	 * This function is run when the robot is first started up and should be
-	 * used for any initialization code.
+	 * This function is run when the robot is first started up and should be used
+	 * for any initialization code.
 	 */
 	@Override
 	public void robotInit() {
 		oi = new OI();
-		//m_chooser.addDefault("Default Auto", new ExampleCommand());   maybe learn how to use this??
+		// m_chooser.addDefault("Default Auto", new ExampleCommand()); maybe learn how
+		// to use this??
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", m_chooser);
-		
-		//initializes all subsystems
+
+		// initializes all subsystems
 		drivetrain = DriveTrain.getInstance();
 		drivetrain.initialize();
 
@@ -61,14 +68,16 @@ public class Robot extends TimedRobot {
 
 		jumper = Jumper.getInstance();
 		jumper.initialize();
-		
+
 		zucc = ZuccCannon.getInstance();
 		zucc.intitialize();
-		
+
 		limitSwitch1 = new DigitalInput(1);
 
-		vision = new Vision();
-		vision.start();
+		ultra = new AnalogInput(1);
+
+		//vision = new Vision();
+		//vision.start();
 	}
 
 	/**

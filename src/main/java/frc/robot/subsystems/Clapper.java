@@ -1,6 +1,7 @@
 package frc.robot.subsystems;
 
 import frc.robot.OI;
+import frc.robot.Robot;
 import frc.robot.RobotMap;
 import frc.robot.commands.AutoClapper;
 import frc.robot.commands.ClapperCommands;
@@ -19,12 +20,10 @@ public class Clapper extends Subsystem {
 	//declaring the motor controllers and double solenoid
 	//be sure to import your ClapperCommands, see above
 	private VictorSP clapperMotorControllerLeft;
-	private VictorSP clapperMotorControllerRight;
 	private DoubleSolenoid clapperSolenoid;
 
 	//the left and right clapper motor controllers defined above
 	//will work together in a differential drive
-	private static DifferentialDrive clapperMotors;
 
 	//creates instance of the ClapperCommands class
 	private ClapperCommands clapperInstance;
@@ -53,20 +52,29 @@ public class Clapper extends Subsystem {
 	//"false" sets squared inputs to false
 	public void moveClapperMotors(double speed)
 	{
-        clapperMotors.arcadeDrive(speed, 0, false);
+		//if (speed < 0 && Robot.ultra.getRangeMM() <= 7)
+		//clapperMotorControllerLeft.set(0);
+		//else{
+		clapperMotorControllerLeft.set(speed);
+		//}
 	}
 	
+	private boolean clapperOut;
+
 	public void movePistons()
 	{
 		//if the B button is pressed and the piston is not in the kReverse state, move the piston into that state
 		//compresses piston
-		if (OI.getInstance().xbox.getBButtonPressed() && clapperSolenoid.get() != Value.kReverse) 
-			clapperSolenoid.set(DoubleSolenoid.Value.kReverse);
-
+		if (clapperOut){
+			clapperSolenoid.set(Value.kReverse);
+			clapperOut = false;
+		}
 		//if the B button is pressed and the piston is not in the kForward state, move the piston into that state
 		//extends piston
-		if (OI.getInstance().xbox.getBButtonPressed() && clapperSolenoid.get() != Value.kForward) 
-			clapperSolenoid.set(DoubleSolenoid.Value.kForward);
+		else if (!clapperOut){
+			clapperSolenoid.set(Value.kForward);
+			clapperOut = true;
+		}
 	}
 	
 	
@@ -87,14 +95,11 @@ public class Clapper extends Subsystem {
 		
 		//connects these to the pwm's
 		clapperMotorControllerLeft = new VictorSP(RobotMap.clapperMotorLeft);
-		clapperMotorControllerRight = new VictorSP(RobotMap.clapperMotorRight);
 		clapperSolenoid = new DoubleSolenoid(RobotMap.solenoidPort4, RobotMap.solenoidPort5);
 
 		//sets the state of clapperSolenoid back to kReverse as its default
 		clapperSolenoid.set(DoubleSolenoid.Value.kReverse);
 
-		//constructs clapperMotors as a differential drive
-		clapperMotors = new DifferentialDrive(clapperMotorControllerLeft, clapperMotorControllerRight);
-
+		clapperOut = false;
 	}
 }

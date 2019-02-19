@@ -24,7 +24,6 @@ public class RobotMap {
 	public static final int rightMotor = 0;
   	public static final int leftMotor = 1; 
 	public static final int clapperMotorLeft = 2; 
-	public static final int clapperMotorRight = 3;
 	public static final int zuccCannonBottom = 4;
 	public static final int zuccCannonTop = 5;
 	
