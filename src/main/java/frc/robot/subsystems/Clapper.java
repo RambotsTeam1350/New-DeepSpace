@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
+import edu.wpi.first.wpilibj.GenericHID.Hand;
 
 
 public class Clapper extends Subsystem {
@@ -46,17 +47,35 @@ public class Clapper extends Subsystem {
 		return instance;
     }
 	
+	private static boolean isSleeping = false;
+
 	//clapperMotors acts as arcade drive but with a fixed rotation of 0
 	//this makes it so we can control moving the motors with just one stick
 	//and the rotation never changes from 0 because we don't need it to.
 	//"false" sets squared inputs to false
-	public void moveClapperMotors(double speed)
+	public void moveClapperMotors()
 	{
-		//if (speed < 0 && Robot.ultra.getRangeMM() <= 7)
-		//clapperMotorControllerLeft.set(0);
-		//else{
-		clapperMotorControllerLeft.set(speed);
-		//}
+		Thread clapperMotorT = new Thread(() -> {
+			while(!Thread.interrupted()){
+				if (!Robot.limitSwitch1.get()){
+					clapperMotorControllerLeft.set(0);
+					try{
+						isSleeping = true;
+						System.out.println("sleeping");
+						Thread.sleep(300);
+						isSleeping = false;
+					}catch (Exception e){
+						System.out.println(e);
+					}
+				}
+				else{
+					clapperMotorControllerLeft.set(OI.getInstance().xbox.getY(Hand.kLeft));
+				}
+				break;
+			}
+		});
+		if (!isSleeping)
+			clapperMotorT.start();
 	}
 	
 	private boolean clapperOut;

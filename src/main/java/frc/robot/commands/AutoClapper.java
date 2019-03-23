@@ -58,10 +58,10 @@ public class AutoClapper extends Command {
 		//while the limit switch is not pressed and the value of pressed is true
 		//move the clapper at full speed
         while (Robot.limitSwitch1.get() && pressed){
-		    Clapper.getInstance().moveClapperMotors(1.0);	
+		    Clapper.getInstance().moveClapperMotors();	
 		}
 		//after the switch is hit, stop the motors
-		Clapper.getInstance().moveClapperMotors(0);
+		Clapper.getInstance().moveClapperMotors();
 		
 		//set variables back to false
         isRunning = false;

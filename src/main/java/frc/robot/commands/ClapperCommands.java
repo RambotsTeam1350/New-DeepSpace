@@ -1,6 +1,5 @@
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.command.Command;
 
 import frc.robot.OI;
@@ -39,7 +38,7 @@ public class ClapperCommands extends Command {
 		//gets instance of Clapper to access its methods
 		//getting instance of OI to access the variable "xbox"
 		//use the built in method "getY()" to get they y value of the left xbox joystick
-		Clapper.getInstance().moveClapperMotors(OI.getInstance().xbox.getY(Hand.kLeft));
+		Clapper.getInstance().moveClapperMotors();
 		
 		//gets instance of Clapper subsystem to access its methods
 		//uses the method movePistons which is written in Clapper

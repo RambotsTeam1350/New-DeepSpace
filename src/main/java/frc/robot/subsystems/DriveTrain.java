@@ -73,6 +73,7 @@ public class DriveTrain extends Subsystem {
 	//takes the input from the joysticks and reads them as speed for the tankdrive
 	public void driveLeftMotor(double speed, double time)
 	{
+		speed = speed/100;
 		leftMotorController.set(speed);
 
 		//restricts this class from moving outside the method while method is active
@@ -86,6 +87,7 @@ public class DriveTrain extends Subsystem {
 	
 	public void driveRightMotor(double speed, double time)
 	{
+		speed = speed/100;
 		rightMotorController.set(speed);
 		
 		//restricts this class from moving outside the method while method is active
