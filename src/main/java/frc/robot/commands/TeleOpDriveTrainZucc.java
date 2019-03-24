@@ -76,6 +76,7 @@ public class TeleOpDriveTrainZucc extends Command {
 	// subsystems is scheduled to run
 	@Override
 	protected void interrupted() {
+		//System.out.println("Interrupting ZUCC");
 		//stops the motors
 		end();
 	}

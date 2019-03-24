@@ -73,6 +73,7 @@ public class TeleOpDriveTrainClapper extends Command {
 	// subsystems is scheduled to run
 	@Override
 	protected void interrupted() {
+		//System.out.println("Interrupting Clapp");
 		//calls end so that the motors will stop if we are not calling them
 		end();
 	}

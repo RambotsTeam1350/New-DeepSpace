@@ -37,7 +37,7 @@ public class ZuccCannon extends Subsystem
     //speed of bottom motor retrieved and set
     public void moveBottomZucc(double speed)
     {
-        zuccBottom.set(-speed);
+        zuccBottom.set(speed);
     }
 
     //speed of top motor retrieved and set

@@ -16,6 +16,7 @@ import frc.robot.subsystems.Compress;
 import frc.robot.subsystems.Jumper;
 import frc.robot.subsystems.ZuccCannon;
 import frc.robot.util.Vision;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 
 
 /**
@@ -87,6 +88,11 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void disabledInit() {
+		
+		jumper.oneOut = false;
+		jumper.twoOut = false;
+		jumper.jumperSolenoid1.set(Value.kForward);
+		jumper.jumperSolenoid2.set(Value.kReverse);
 
 	}
 

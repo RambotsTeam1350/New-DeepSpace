@@ -69,7 +69,12 @@ public class Clapper extends Subsystem {
 					}
 				}
 				else{
-					clapperMotorControllerLeft.set(OI.getInstance().xbox.getY(Hand.kLeft));
+					double speed = OI.getInstance().xbox.getY(Hand.kLeft);
+					System.out.println(speed);
+					if (speed < 0.1 && speed > -0.1){
+						speed = -0.05;
+					}
+					clapperMotorControllerLeft.set(-speed);
 				}
 				break;
 			}
@@ -79,20 +84,40 @@ public class Clapper extends Subsystem {
 	}
 	
 	private boolean clapperOut;
+	private boolean active = false;
 
 	public void movePistons()
 	{
+/*
+		Thread clapperPistonT = new Thread(() -> {
+			active = true;
+			clapperSolenoid.set(Value.kReverse);
+			try{
+				System.out.println("sleeping");
+				Thread.sleep(1000);
+			}catch (Exception e){
+				System.out.println(e);
+			}
+			clapperSolenoid.set(Value.kForward);
+			
+		});
+		if (!active){
+			clapperPistonT.start();
+		}
+		*/
 		//if the B button is pressed and the piston is not in the kReverse state, move the piston into that state
 		//compresses piston
+		
 		if (clapperOut){
-			clapperSolenoid.set(Value.kReverse);
+			clapperSolenoid.set(Value.kForward);
 			clapperOut = false;
 		}
 		//if the B button is pressed and the piston is not in the kForward state, move the piston into that state
 		//extends piston
 		else if (!clapperOut){
-			clapperSolenoid.set(Value.kForward);
+			clapperSolenoid.set(Value.kReverse);
 			clapperOut = true;
+		
 		}
 	}
 	
@@ -117,7 +142,7 @@ public class Clapper extends Subsystem {
 		clapperSolenoid = new DoubleSolenoid(RobotMap.solenoidPort4, RobotMap.solenoidPort5);
 
 		//sets the state of clapperSolenoid back to kReverse as its default
-		clapperSolenoid.set(DoubleSolenoid.Value.kReverse);
+		clapperSolenoid.set(DoubleSolenoid.Value.kForward);
 
 		clapperOut = false;
 	}

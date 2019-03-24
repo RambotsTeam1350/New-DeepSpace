@@ -10,8 +10,8 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 public class Jumper extends Subsystem {
 
 	//declares instance variables for the two solenoids
-	private static DoubleSolenoid jumperSolenoid1;
-	private static DoubleSolenoid jumperSolenoid2;
+	public static DoubleSolenoid jumperSolenoid1;
+	public static DoubleSolenoid jumperSolenoid2;
 
 	//creates instance variable of JumperCommands
 	private JumperCommands jumperInstance;
@@ -32,21 +32,21 @@ public class Jumper extends Subsystem {
 		return instance;
 	}
 	
-	private boolean oneOut;
+	public boolean oneOut;
 	//extends or compresses jumper piston1 with left bumper of xbox controller
 	public void moveJumper1() 
 	{
 		if (oneOut){
-			jumperSolenoid1.set(Value.kReverse);
+			jumperSolenoid1.set(Value.kForward);
 			oneOut = false;
 		}
 		else if (!oneOut){
-			jumperSolenoid1.set(Value.kForward);
+			jumperSolenoid1.set(Value.kReverse);
 			oneOut = true;
 		}
 	}
 
-	private boolean twoOut;
+	public boolean twoOut;
 	//extends and compresses jumper piston2 with right bumper of xbox controller
 	public void moveJumper2() 
 	{
@@ -75,7 +75,7 @@ public class Jumper extends Subsystem {
 		jumperSolenoid1 = new DoubleSolenoid(RobotMap.solenoidPort0,RobotMap.solenoidPort1);
 
 		//default value of piston is reverse (compressed)
-        jumperSolenoid1.set(DoubleSolenoid.Value.kReverse);
+        jumperSolenoid1.set(DoubleSolenoid.Value.kForward);
 
 		//jumper solenoid2 is bound to port 2
 		jumperSolenoid2 = new DoubleSolenoid(RobotMap.solenoidPort2, RobotMap.solenoidPort3);
