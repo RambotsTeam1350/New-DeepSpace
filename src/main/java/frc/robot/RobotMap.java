@@ -47,7 +47,9 @@ public class RobotMap {
 	public static final int solenoidPort2 = 2;
 	public static final int solenoidPort3 = 3;
 	public static final int solenoidPort4 = 4;
-  	public static final int solenoidPort5 = 5;  
+	public static final int solenoidPort5 = 5; 
+	public static final int solenoidPort6 = 6;
+  	public static final int solenoidPort7 = 7;    
   
 
 	// If you are using multiple modules, make sure to define both the port

@@ -11,7 +11,8 @@ public class Jumper extends Subsystem {
 
 	//declares instance variables for the two solenoids
 	public static DoubleSolenoid jumperSolenoid1;
-	public static DoubleSolenoid jumperSolenoid2;
+	public static DoubleSolenoid jumperSolenoid2Left;
+	public static DoubleSolenoid jumperSolenoid2Right;
 
 	//creates instance variable of JumperCommands
 	private JumperCommands jumperInstance;
@@ -48,14 +49,16 @@ public class Jumper extends Subsystem {
 
 	public boolean twoOut;
 	//extends and compresses jumper piston2 with right bumper of xbox controller
-	public void moveJumper2() 
+	public void moveJumpers2() 
 	{
 		if (twoOut){
-			jumperSolenoid2.set(Value.kReverse);
+			jumperSolenoid2Right.set(Value.kReverse);
+			jumperSolenoid2Left.set(Value.kReverse);
 			twoOut = false;
 		}
 		else if (!twoOut){
-			jumperSolenoid2.set(Value.kForward);
+			jumperSolenoid2Right.set(Value.kForward);
+			jumperSolenoid2Left.set(Value.kForward);
 			twoOut = true;
 		}
 	}
@@ -72,16 +75,22 @@ public class Jumper extends Subsystem {
 		jumperInstance = JumperCommands.getInstance();
 		
 		//jumper solenoid1 is bound to port 1
-		jumperSolenoid1 = new DoubleSolenoid(RobotMap.solenoidPort0,RobotMap.solenoidPort1);
+		jumperSolenoid1 = new DoubleSolenoid(RobotMap.solenoidPort2,RobotMap.solenoidPort3);
 
 		//default value of piston is reverse (compressed)
         jumperSolenoid1.set(DoubleSolenoid.Value.kForward);
 
 		//jumper solenoid2 is bound to port 2
-		jumperSolenoid2 = new DoubleSolenoid(RobotMap.solenoidPort2, RobotMap.solenoidPort3);
+		jumperSolenoid2Right = new DoubleSolenoid(RobotMap.solenoidPort0, RobotMap.solenoidPort1);
 
 		//default value of piston is reverse (compressed)
-		jumperSolenoid2.set(DoubleSolenoid.Value.kReverse);
+		jumperSolenoid2Right.set(DoubleSolenoid.Value.kReverse);
+
+		//jumper solenoid2 is bound to port 2
+		jumperSolenoid2Left = new DoubleSolenoid(RobotMap.solenoidPort6, RobotMap.solenoidPort7);
+
+		//default value of piston is reverse (compressed)
+		jumperSolenoid2Left.set(DoubleSolenoid.Value.kReverse);
 
 		oneOut = false;
 		twoOut =  false;

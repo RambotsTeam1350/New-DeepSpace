@@ -33,10 +33,10 @@ public class JumperCommands extends Command {
 	{
 		//accesses the Jumper subsystem and call the method moveJumper1() and moveJumper2()
 		if (OI.getInstance().xbox.getBumperPressed(Hand.kLeft)){
-			Jumper.getInstance().moveJumper1();
+			Jumper.getInstance().moveJumpers2();
 		}
 		if (OI.getInstance().xbox.getBumperPressed(Hand.kRight)){
-			Jumper.getInstance().moveJumper2();
+			Jumper.getInstance().moveJumper1();
 		}
 	}
 

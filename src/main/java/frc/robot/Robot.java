@@ -90,9 +90,9 @@ public class Robot extends TimedRobot {
 	public void disabledInit() {
 		
 		jumper.oneOut = false;
-		jumper.twoOut = false;
+		//jumper.twoOut = false;
 		jumper.jumperSolenoid1.set(Value.kForward);
-		jumper.jumperSolenoid2.set(Value.kReverse);
+		//jumper.jumperSolenoid2.set(Value.kReverse);
 
 	}
 
