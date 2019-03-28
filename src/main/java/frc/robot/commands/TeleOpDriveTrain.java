@@ -4,21 +4,22 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.OI;
 import frc.robot.subsystems.DriveTrain;
 
-public class TeleOpDriveTrainClapper extends Command {
+public class TeleOpDriveTrain extends Command {
 	
 	//squaredInputs allows for a slower increase an speed instead a linear acceleration
 	private boolean squaredInputs;
+	private boolean forward;
 	
 	//creates instance of TeleOpDriveTrainClapper
-	private static TeleOpDriveTrainClapper instance;
-	public static TeleOpDriveTrainClapper getInstance()
+	private static TeleOpDriveTrain instance;
+	public static TeleOpDriveTrain getInstance()
 	{
 		if(instance == null)
-			instance = new TeleOpDriveTrainClapper();
+			instance = new TeleOpDriveTrain();
 		return instance;
 	}
 	
-	public TeleOpDriveTrainClapper() {
+	public TeleOpDriveTrain() {
 		//an instance of the drivetrain must be created before this constructor can be used
 		requires(DriveTrain.getInstance());
 	}
@@ -28,8 +29,10 @@ public class TeleOpDriveTrainClapper extends Command {
 	protected void initialize() {
 		//sets squaredInputs to false because we want linear acceleration
 		squaredInputs = false;
+		forward = true;
+		isPressed = false;
 		//the Drivetrain subsystem's default command is set to this drivetrain
-		DriveTrain.getInstance().setCommand(TeleOpDriveTrainClapper.getInstance());;
+		DriveTrain.getInstance().setCommand(TeleOpDriveTrain.getInstance());;
 	}
 
 	
@@ -45,15 +48,31 @@ public class TeleOpDriveTrainClapper extends Command {
 		return (OI.getInstance().rightStick.getY());
 	}
 	
+	public void setForward(boolean f){
+		forward = f;
+	}
+
+	private boolean isPressed;
+	private void toggleForward(){
+		if (OI.getInstance().joyRightTrigger.get() && forward && !isPressed){
+			forward = false; isPressed = true;}
+		if (OI.getInstance().joyRightTrigger.get() && !forward && !isPressed){
+			forward = true; isPressed = true;}
+		if (!OI.getInstance().joyRightTrigger.get())
+			isPressed = false;
+	}
+
 	// Called repeatedly when this Command is scheduled to run
 	@Override
 	protected void execute() 
 	{
 		//calls the whichDrive() command from the Drivetrain subsystem class
-		DriveTrain.getInstance().whichDrive();
-
+		toggleForward();
 		//flips the drivetrain's direction
-		DriveTrain.getInstance().tankDrive(-getLeftStick(), -getRightStick(), squaredInputs);
+		if (forward)
+			DriveTrain.getInstance().tankDrive(-getLeftStick(), -getRightStick(), squaredInputs);
+		else if (!forward)
+			DriveTrain.getInstance().tankDrive(getRightStick(), getLeftStick(), squaredInputs);
 	}
 
 	// Make this return true when this Command no longer needs to run execute()

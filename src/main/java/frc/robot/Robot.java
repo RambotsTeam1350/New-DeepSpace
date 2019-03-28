@@ -15,6 +15,7 @@ import frc.robot.subsystems.Clapper;
 import frc.robot.subsystems.Compress;
 import frc.robot.subsystems.Jumper;
 import frc.robot.subsystems.ZuccCannon;
+import frc.robot.commands.TeleOpDriveTrain;
 import frc.robot.util.Vision;
 
 
@@ -87,6 +88,7 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void disabledInit() {
+		TeleOpDriveTrain.getInstance().setForward(true);
 
 	}
 
