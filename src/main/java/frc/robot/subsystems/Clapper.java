@@ -3,7 +3,6 @@ package frc.robot.subsystems;
 import frc.robot.OI;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
-import frc.robot.commands.AutoClapper;
 import frc.robot.commands.ClapperCommands;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
@@ -29,9 +28,6 @@ public class Clapper extends Subsystem {
 	//creates instance of the ClapperCommands class
 	private ClapperCommands clapperInstance;
 
-	//creates instance variable of the AutoClapper class
-	private AutoClapper autoInstance;
-
 
 	public void initDefaultCommand() {
 		//uses the commands in the ClapperCommands command class
@@ -55,36 +51,15 @@ public class Clapper extends Subsystem {
 	//"false" sets squared inputs to false
 	public void moveClapperMotors()
 	{
-		Thread clapperMotorT = new Thread(() -> {
-			while(!Thread.interrupted()){
-				if (!Robot.limitSwitch1.get()){
-					clapperMotorControllerLeft.set(0);
-					try{
-						isSleeping = true;
-						System.out.println("sleeping");
-						Thread.sleep(300);
-						isSleeping = false;
-					}catch (Exception e){
-						System.out.println(e);
-					}
-				}
-				else{
-					double speed = OI.getInstance().xbox.getY(Hand.kLeft);
-					System.out.println(speed);
-					if (speed < 0.1 && speed > -0.1){
-						speed = -0.05;
-					}
-					clapperMotorControllerLeft.set(-speed);
-				}
-				break;
+		double speed = OI.getInstance().xbox.getY(Hand.kLeft);
+			System.out.println(speed);
+			if (speed < 0.1 && speed > -0.1){
+				speed = -0.05;
 			}
-		});
-		if (!isSleeping)
-			clapperMotorT.start();
+			clapperMotorControllerLeft.set(-speed);
 	}
 	
 	private boolean clapperOut;
-	private boolean active = false;
 
 	public void movePistons()
 	{
@@ -133,9 +108,6 @@ public class Clapper extends Subsystem {
 		
 		//the clapperInstance is the instance of the ClapperCommands
 		clapperInstance = ClapperCommands.getInstance();
-
-		//gets instance of AutoClapper
-		autoInstance = AutoClapper.getInstance();
 		
 		//connects these to the pwm's
 		clapperMotorControllerLeft = new VictorSP(RobotMap.clapperMotorLeft);
