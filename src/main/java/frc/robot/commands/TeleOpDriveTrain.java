@@ -54,9 +54,9 @@ public class TeleOpDriveTrain extends Command {
 
 	private boolean isPressed;
 	private void toggleForward(){
-		if (OI.getInstance().joyRightTrigger.get() && forward && !isPressed){
-			forward = false; isPressed = true;}
 		if (OI.getInstance().joyRightTrigger.get() && !forward && !isPressed){
+			forward = false; isPressed = true;}
+		if (OI.getInstance().joyRightTrigger.get() && forward && !isPressed){
 			forward = true; isPressed = true;}
 		if (!OI.getInstance().joyRightTrigger.get())
 			isPressed = false;
