@@ -2,8 +2,7 @@ package frc.robot.subsystems;
 
 import frc.robot.OI;
 import frc.robot.RobotMap;
-import frc.robot.commands.TeleOpDriveTrainClapper;
-import frc.robot.commands.TeleOpDriveTrainZucc;
+import frc.robot.commands.TeleOpDriveTrain;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -27,7 +26,7 @@ public class DriveTrain extends Subsystem {
 	//makes default drivetrain that uses commands from TeleOpDriveTrainZucc
 	//front of drivetrain is the side of the robot that has the intake of the Zucc
 	public void initDefaultCommand() {
-		setDefaultCommand(TeleOpDriveTrainZucc.getInstance());
+		setDefaultCommand(TeleOpDriveTrain.getInstance());
 	}
 
 	//this method is used to change the direction of the drivetrain
@@ -63,12 +62,14 @@ public class DriveTrain extends Subsystem {
 
 	//allows for switch of direction of drivetrain
 	//if the trigger on the right joystick is pressed, drivetrain direction switches
+	/*
 	public void whichDrive(){
-		if (DriveTrain.getInstance().getCurrentCommand() == TeleOpDriveTrainClapper.getInstance())
+		if (DriveTrain.getInstance().getCurrentCommand() == TeleOpDriveTrain.getInstance())
 			OI.getInstance().joyRightTrigger.toggleWhenPressed(TeleOpDriveTrainZucc.getInstance());
 		else if (DriveTrain.getInstance().getCurrentCommand() == TeleOpDriveTrainZucc.getInstance())
 			OI.getInstance().joyRightTrigger.toggleWhenPressed(TeleOpDriveTrainClapper.getInstance());
 	}
+	*/
 	
 	//takes the input from the joysticks and reads them as speed for the tankdrive
 	public void driveLeftMotor(double speed, double time)
