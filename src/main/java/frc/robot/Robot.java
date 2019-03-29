@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.AnalogOutput;
 import edu.wpi.first.wpilibj.DigitalInput;
+import frc.robot.commands.TeleOpDriveTrain;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Clapper;
 import frc.robot.subsystems.Compress;
@@ -88,7 +89,7 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void disabledInit() {
-		
+		TeleOpDriveTrain.getInstance().setForward(true);
 		jumper.oneOut = false;
 		jumper.twoOut = false;
 		jumper.jumperSolenoid1.set(Value.kForward);
